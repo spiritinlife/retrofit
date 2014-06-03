@@ -1,6 +1,8 @@
 // Copyright 2014 Square, Inc.
 package retrofit.client;
 
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Protocol;
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
 import com.squareup.okhttp.mockwebserver.RecordedRequest;
@@ -24,7 +26,7 @@ public class ClientIntegrationTest {
   @Parameterized.Parameters
   public static List<Object[]> clients() {
     return Arrays.asList(new Object[][] {
-        { new OkClient() },
+        { new OkClient(new OkHttpClient().setProtocols(Arrays.asList(Protocol.HTTP_11))) },
         { new UrlConnectionClient() },
         { new ApacheClient() }
     });
